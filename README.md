@@ -7,7 +7,7 @@ Simple library for easy operations involving money: Currency conversion, compari
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'money', ,:git =>'git://github.com/natonnelier/money.git'
+gem 'money', :git =>'git://github.com/natonnelier/money.git'
 ```
 
 And then execute:
@@ -22,14 +22,14 @@ Or install it yourself as:
 
 ### Configure the currency rates with respect to a base currency (here EUR):
 
-Money.conversion_rates('EUR', {
+Money::Money.conversion_rates('EUR', {
  'USD'     => 1.11,
  'Bitcoin' => 0.0047
 })
 
 ### Instantiate money objects:
 
-fifty_eur = Money.new(50, 'EUR')
+fifty_eur = Money::Money.new(50, 'EUR')
 
 ### Get amount and currency:
 
@@ -43,7 +43,7 @@ fifty_eur.convert_to('USD') # => 55.50 USD
 
 ### Perform operations in different currencies:
 
-twenty_dollars = Money.new(20, 'USD')
+twenty_dollars = Money::Money.new(20, 'USD')
 
 ### Arithmetics:
 
@@ -54,13 +54,13 @@ twenty_dollars * 3         # => 60 USD
 
 ### Comparisons (also in different currencies):
 
-twenty_dollars == Money.new(20, 'USD') # => true
-twenty_dollars == Money.new(30, 'USD') # => false
+twenty_dollars == Money::Money.new(20, 'USD') # => true
+twenty_dollars == Money::Money.new(30, 'USD') # => false
 
 fifty_eur_in_usd = fifty_eur.convert_to('USD')
 fifty_eur_in_usd == fifty_eur          # => true
 
-twenty_dollars > Money.new(5, 'USD')   # => true
+twenty_dollars > Money::Money.new(5, 'USD')   # => true
 twenty_dollars < fifty_eur             # => true
 
 ## Development
