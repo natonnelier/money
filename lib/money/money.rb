@@ -29,12 +29,12 @@ module Money
     end
 
     def + (other)
-      other_amount = other.currency == @currency ? other.amount : other.convert_to(@currency).amount
+      other_amount = other_to_currency(other).currency
       self.class.new(@amount + other_amount, @currency)
     end
 
     def - (other)
-      other_amount = other.currency == @currency ? other.amount : other.convert_to(@currency).amount
+      other_amount = other_to_currency(other).amount
       self.class.new(@amount - other_amount, @currency)
     end
 
@@ -47,21 +47,22 @@ module Money
     end
 
     def == (other)
-      other_converter = other.currency == @currency ? other : other.convert_to(@currency)
-      other_converter.amount == @amount
+      other_to_currency(other).amount == @amount
     end
 
     def < (other)
-      other_converter = other.currency == @currency ? other : other.convert_to(@currency)
-      @amount < other_converter.amount
+      @amount < other_to_currency(other).amount
     end
 
     def > (other)
-      other_converter = other.currency == @currency ? other : other.convert_to(@currency)
-      @amount > other_converter.amount
+      @amount > other_to_currency(other).amount
     end
 
     private
+    def other_to_currency other
+      other.currency == @currency ? other : other.convert_to(@currency)
+    end
+
     def amount_in_default_currency
       return @amount if @currency == default_currency
       @amount / rates[@currency]

@@ -1,3 +1,5 @@
+require 'spec/spec_helper'
+
 RSpec.describe Money do
   before do
     Money::Money.conversion_rates('EUR', {
