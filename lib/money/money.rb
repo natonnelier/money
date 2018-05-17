@@ -24,7 +24,7 @@ module Money
 
     def convert_to currency
       validate_currency!(currency)
-      amount =  (amount_in_default_currency * rates[currency]).round(2)
+      amount =  (amount_in_default_currency * rates[currency]).round(4)
       self.class.new(amount, currency)
     end
 
