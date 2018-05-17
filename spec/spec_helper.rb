@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "money"
+require "ruby_money"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
