@@ -1,4 +1,4 @@
-require 'spec/spec_helper'
+require './spec/spec_helper'
 
 RSpec.describe Money do
   before do
@@ -124,6 +124,24 @@ RSpec.describe Money do
         end
       end
     end
-
+    
+    describe "update conversion rates" do
+        before do
+          Money::Money.conversion_rates('USD',{'EUR' => 0.89})
+        end
+        
+        context "when money is in USD" do
+          let(:money_in_usd) { Money::Money.new(60, 'USD') }
+            
+          it "sets the money object correctly" do
+            expect(money_in_usd.class).to eq(Money::Money)
+            expect(money_in_usd.inspect).to eq("60.00 USD")
+          end
+          
+          it "should convert to EUR with the proper values" do
+            expect(money_in_usd.convert_to('EUR').amount).to eq(60*0.89)
+          end
+        end
+    end
   end
 end

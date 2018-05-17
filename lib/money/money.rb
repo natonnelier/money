@@ -29,7 +29,7 @@ module Money
     end
 
     def + (other)
-      other_amount = other_to_currency(other).currency
+      other_amount = other_to_currency(other).amount
       self.class.new(@amount + other_amount, @currency)
     end
 
